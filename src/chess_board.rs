@@ -17,8 +17,8 @@ impl ChessBoard {
         for i in 3..5 {
             let chess_gray = Chess::new(Position { x: i, y: 0 }, ChessKind::LEAF, Camp::GRAY);
             let chess_green = Chess::new(Position { x: i, y: 7 }, ChessKind::LEAF, Camp::GREEN);
-            board[i][1] = State::set_chess(Some(chess_gray));
-            board[i][6] = State::set_chess(Some(chess_green));
+            board[i][1].set_chess(Some(chess_gray));
+            board[i][6].set_chess(Some(chess_green));
         }
         ChessBoard { board }
     }
@@ -30,4 +30,6 @@ impl ChessBoard {
     fn is_green_root(&self, position: Position) -> bool {
         self.board[position.y][position.x].is_root == Root::GREEN
     }
+
+    //fn push()
 }

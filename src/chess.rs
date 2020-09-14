@@ -13,9 +13,9 @@ pub struct Position {
 
 #[derive(Clone, Debug)]
 pub struct Chess {
-    kind: ChessKind,
-    position: Position,
-    camp: Camp,
+    pub kind: ChessKind,
+    pub position: Position,
+    pub camp: Camp,
 }
 
 #[derive(Eq, PartialEq, Clone, Debug)]

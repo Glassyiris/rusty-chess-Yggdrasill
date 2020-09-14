@@ -1,4 +1,4 @@
-use crate::chess::Chess;
+use crate::chess::{Chess, Position, Camp};
 
 #[derive(Clone, Debug)]
 pub struct State {
@@ -16,13 +16,16 @@ pub enum Root {
 }
 
 impl State {
-    pub(crate) fn set_chess(chess: Option<Chess>) -> Self {
-        State {
-            chess,
-            gray: 0,
-            green: 0,
-            is_root: Root::NONE,
+    pub(crate) fn set_chess(&mut self, chess: Option<Chess>) {
+        if self.can_set() {
+            self.chess = chess;
+        } else {
+            return;
         }
+
+        //TODO: update,push
+
+
     }
 
     pub(crate) fn default() -> Self {
@@ -32,5 +35,22 @@ impl State {
             green: 0,
             is_root: Root::NONE,
         }
+    }
+
+    pub(crate) fn drop(&mut self) {
+        let camp = self.chess.unwrap().camp.clone();
+        self.chess = None;
+        //TODO: update
+    }
+
+    fn can_set(&self) -> bool {
+        let mut a = false;
+        if let Some(ches) = self.chess.clone() {
+            match ches.camp {
+                Camp::GREEN if self.green != 0 => a = true,
+                Camp::GRAY if self.gray != 0 => a = true,
+            }
+        }
+        a && self.chess.is_none()
     }
 }
