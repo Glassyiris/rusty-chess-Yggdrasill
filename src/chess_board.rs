@@ -1,4 +1,3 @@
-use crate::chess::Camp::{GRAY, GREEN};
 use crate::chess::*;
 use crate::state::{Root, State};
 

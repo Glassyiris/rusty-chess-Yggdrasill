@@ -38,7 +38,7 @@ impl State {
     }
 
     pub(crate) fn drop(&mut self) {
-        let camp = self.chess.unwrap().camp.clone();
+        let camp = self.chess.as_ref().unwrap().camp.clone();
         self.chess = None;
         //TODO: update
     }
@@ -49,6 +49,7 @@ impl State {
             match ches.camp {
                 Camp::GREEN if self.green != 0 => a = true,
                 Camp::GRAY if self.gray != 0 => a = true,
+                _ => {}
             }
         }
         a && self.chess.is_none()
